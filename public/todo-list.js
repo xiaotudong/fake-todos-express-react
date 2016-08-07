@@ -19,6 +19,7 @@ const App = React.createClass({
     render: function() {
         return <div>
            <TodoInput addElement = {this.addElement}/>
+            <TodoDisplay elements = {this.state.elements}/>
         </div>
     }
 });
@@ -45,6 +46,21 @@ const TodoInput = React.createClass({
                 {this.props.elements}
             </div>
         )
+    }
+});
+
+const TodoDisplay = React.createClass({
+    render:function() {
+
+        const elements = this.props.elements.map((ele,index) =>{
+            const element = this.props.elements[index];
+            return <div key={index}>
+                <input type = "checkbox"/>{element.things}
+                </div>
+        });
+    return <div id = "display">
+        {elements}
+          </div>
     }
 });
 
