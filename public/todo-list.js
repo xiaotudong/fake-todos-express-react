@@ -11,8 +11,15 @@ const App = React.createClass({
     },
     render: function() {
         return <div>
-            {this.state.elements.join(',')}
+           <TodoInput/>
         </div>
+    }
+});
+const TodoInput = React.createClass({
+    render:function() {
+    return <div id = "input">
+    <input type = "text" placeholder="What needs to be done?"/>
+          </div>
     }
 });
 

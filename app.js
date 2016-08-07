@@ -19,7 +19,6 @@ fs.stat('todo-items.json', function (err, stat, next) {
     }
 });
 
-
 app.use('/', require('./public/get-allItems'));
 
 app.listen(3000, () => {
