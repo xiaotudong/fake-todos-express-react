@@ -1,7 +1,7 @@
 const App = React.createClass({
     getInitialState: function () {
         return {
-            elements: []
+            elements: [],
         }
     },
     componentDidMount: function() {
@@ -9,17 +9,42 @@ const App = React.createClass({
             this.setState({elements});
         });
     },
+    addElement: function (element) {
+        const elements = this.state.elements;
+        elements.push(element);
+        this.setState({elements});
+
+        console.log(elements);
+    },
     render: function() {
         return <div>
-           <TodoInput/>
+           <TodoInput addElement = {this.addElement}/>
         </div>
     }
 });
 const TodoInput = React.createClass({
-    render:function() {
-    return <div id = "input">
-    <input type = "text" placeholder="What needs to be done?"/>
-          </div>
+    handlerKeyUp: function (event) {
+        if (event.keyCode === 13) {
+            let value = event.target.value;
+
+            if (!value) return false;
+            let newElement = {
+                things: value,
+                isDone: false
+            };
+            event.target.value = "";
+            this.props.addElement(newElement);
+        }
+    },
+    render: function () {
+        return (
+            <div id = "input">
+                <input onKeyUp={this.handlerKeyUp}
+                       type="text"
+                       placeholder="What needs to be done?"/>
+                {this.props.elements}
+            </div>
+        )
     }
 });
 
