@@ -13,13 +13,16 @@ const App = React.createClass({
         const elements = this.state.elements;
         elements.push(element);
         this.setState({elements});
-
-        console.log(elements);
+    },
+    deleteElement:function (index) {
+        const elements = this.state.elements;
+        elements.splice(index,1);
+        this.setState({elements});
     },
     render: function() {
         return <div>
            <TodoInput addElement = {this.addElement}/>
-            <TodoDisplay elements = {this.state.elements}/>
+            <TodoDisplay elements = {this.state.elements} onDelete = {this.deleteElement}/>
         </div>
     }
 });
@@ -50,12 +53,15 @@ const TodoInput = React.createClass({
 });
 
 const TodoDisplay = React.createClass({
+    delete: function (index) {
+        this.props.onDelete(index);
+    },
     render:function() {
-
         const elements = this.props.elements.map((ele,index) =>{
             const element = this.props.elements[index];
             return <div key={index}>
                 <input type = "checkbox"/>{element.things}
+                <button onClick={this.delete.bind(this, index)}>X</button>
                 </div>
         });
     return <div id = "display">
