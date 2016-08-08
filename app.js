@@ -2,8 +2,8 @@ var express = require('express');
 var fs = require("fs");
 var app = express();
 
-var bodyParser = require('body-parser');
-app.use(bodyParser.json());
+/*var bodyParser = require('body-parser');
+app.use(bodyParser.json());*/
 
 app.use(express.static(__dirname + '/public'));
 
@@ -22,7 +22,7 @@ fs.stat('todo-items.json', function (err, stat, next) {
 app.use('/', require('./public/get-allItems'));
 
 app.listen(3000, () => {
-    console.log('todo-list Server is running..');
+    console.log('Server is running..');
 });
 
 
